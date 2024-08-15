@@ -183,7 +183,22 @@ body {
 .btn:hover {
     background-color: #e9bb24;
 }
+.search-box {
+    width: 200px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border: 1px solid;
+    border-radius: 20px;
 
+    input {
+            width: 180px;
+            outline: none;
+            border: none;
+            background-color: transparent;
+        }
+    }
 /*
 SPACING SYSTEM (px)
 2 / 4 / 8 / 12 / 16 / 24 / 32 / 40 / 48 / 64 / 80 / 96 / 128

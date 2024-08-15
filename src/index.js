@@ -1,139 +1,8 @@
-// import React from "react";
-// import ReactDOM from "react-dom/client";
-// const pizzaData = [
-//   {
-//     name: "Focaccia",
-//     ingredients: "Bread with italian olive oil and rosemary",
-//     price: 6,
-//     photoName: "pizzas/focaccia.jpg",
-//     soldOut: false,
-//   },
-//   {
-//     name: "Pizza Margherita",
-//     ingredients: "Tomato and mozarella",
-//     price: 10,
-//     photoName: "pizzas/margherita.jpg",
-//     soldOut: false,
-//   },
-//   {
-//     name: "Pizza Spinaci",
-//     ingredients: "Tomato, mozarella, spinach, and ricotta cheese",
-//     price: 12,
-//     photoName: "pizzas/spinaci.jpg",
-//     soldOut: false,
-//   },
-//   {
-//     name: "Pizza Funghi",
-//     ingredients: "Tomato, mozarella, mushrooms, and onion",
-//     price: 12,
-//     photoName: "pizzas/funghi.jpg",
-//     soldOut: false,
-//   },
-//   {
-//     name: "Pizza Salamino",
-//     ingredients: "Tomato, mozarella, and pepperoni",
-//     price: 15,
-//     photoName: "pizzas/salamino.jpg",
-//     soldOut: true,
-//   },
-//   {
-//     name: "Pizza Prosciutto",
-//     ingredients: "Tomato, mozarella, ham, aragula, and burrata cheese",
-//     price: 18,
-//     photoName: "pizzas/prosciutto.jpg",
-//     soldOut: false,
-//   },
-// ];
-
-
-// function App() {
-//   return (
-//     <>
-//       <Header/>
-//       <Menu/>
-//       <Footer />
-//     </>
-//   );
-// }
-
-// function Header() {
-//  return <h1>Fast React Pizza co.</h1>
-// } 
-// function Menu() {
-//   const pizzass = pizzaData;
-//   const numpizza = pizzass.length;
-//   return (
-//     <div className="">
-//       <h2>Our Menu</h2>
-
-//       {numpizza ? (
-//         <>
-//           <p>
-//             hi iam arun kumar i am studying in ngm college of arts and science
-//             at pollachi in Coimbatore in tamil nadu India
-//           </p>
-//           {pizzass.map((pizza) => (
-//             <Pizza pizzaobj={pizza} key={pizza.name} />
-//           ))}
-//         </>
-//       ) : (
-//         <div>
-//           <p>There is no Menu in the Store</p>
-//         </div>
-//       )}
-//     </div>
-//   );
-// } 
-// function Pizza({ pizzaobj }) {
-//   // if (pizzaobj.soldOut) return (<h1>This items is out of stock</h1>);
-//   return (
-//     <div className={`pizza ${pizzaobj.soldOut ? "sold-out":""}`}>
-//       <img src={pizzaobj.photoName} alt="" />
-//       <h1>{pizzaobj.name}</h1>
-//       <p>{pizzaobj.ingredients}</p>
-//       <span>{pizzaobj.soldOut?"sold out":pizzaobj.price}</span>
-      
-      
-//     </div>
-//   );
-// }
-// function Footer() {
-//   const hour = (new Date().getHours());
-//   const openhour = 8;
-//   const closehour = 22;
-//   const isopen = hour >= openhour && hour <= closehour;
-//   console.log(isopen);
-
-
-
-//   return (
-//     <footer>
-//       {new Date().toLocaleTimeString()}
-//       {isopen ? <Order close={ closehour} /> : <p>closed</p>}
-//     </footer>
-//     // return React.createElement("footer",null,"We're Currently open!")
-//   );} 
-// function Order(closehour) {
-//   return (
-//     <div>
-//       <p>We're Currently open and close at {closehour.close}.00 PM</p>
-//           <button>Order</button>
-//         </div>
-      
-//   )
-// }
-
-
-
-// const root = ReactDOM.createRoot(document.getElementById("root"));
-// root.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>
-// );
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
+import { FaSearch } from "react-icons/fa";
 import "./index.css";
+
 
 const pizzaData = [
   {
@@ -178,12 +47,83 @@ const pizzaData = [
     photoName: "pizzas/prosciutto.jpg",
     soldOut: false,
   },
+  {
+    name: "Pizza Margherita",
+    ingredients: "Tomato, mozzarella, basil, olive oil",
+    price: 15,
+    photoName: "pizzas/margherita.jpg",
+    soldOut: false,
+  },
+  {
+    name: "Pizza Diavola",
+    ingredients: "Tomato, mozzarella, spicy salami, chili peppers",
+    price: 20,
+    photoName: "pizzas/diavola.jpg",
+    soldOut: false,
+  },
+  {
+    name: "Pizza Quattro Stagioni",
+    ingredients: "Tomato, mozzarella, ham, mushrooms, artichokes, olives",
+    price: 22,
+    photoName: "pizzas/quattro_stagioni.jpg",
+    soldOut: false,
+  },
+  {
+    name: "Pizza Capricciosa",
+    ingredients: "Tomato, mozzarella, ham, mushrooms, olives, artichokes, eggs",
+    price: 21,
+    photoName: "pizzas/capricciosa.jpg",
+    soldOut: true,
+  },
+  {
+    name: "Pizza Funghi",
+    ingredients: "Tomato, mozzarella, mushrooms, garlic, parsley",
+    price: 18,
+    photoName: "pizzas/funghi.jpg",
+    soldOut: false,
+  },
+  {
+    name: "Pizza Quattro Formaggi",
+    ingredients: "Tomato, mozzarella, gorgonzola, parmesan, provolone",
+    price: 23,
+    photoName: "pizzas/quattro_formaggi.jpg",
+    soldOut: true,
+  },
+  {
+    name: "Pizza Napoletana",
+    ingredients: "Tomato, mozzarella, anchovies, capers, oregano",
+    price: 19,
+    photoName: "pizzas/napoletana.jpg",
+    soldOut: false,
+  },
+  {
+    name: "Pizza Ortolana",
+    ingredients: "Tomato, mozzarella, zucchini, eggplant, bell peppers, onions",
+    price: 18,
+    photoName: "pizzas/ortolana.jpg",
+    soldOut: false,
+  },
+  {
+    name: "Pizza Boscaiola",
+    ingredients: "Tomato, mozzarella, mushrooms, sausage, garlic, parsley",
+    price: 21,
+    photoName: "pizzas/boscaiola.jpg",
+    soldOut: false,
+  },
+  {
+    name: "Pizza Marinara",
+    ingredients: "Tomato, garlic, oregano, olive oil",
+    price: 14,
+    photoName: "pizzas/marinara.jpg",
+    soldOut: false,
+  },
 ];
 
 function App() {
   return (
     <div className="container">
       <Header />
+      <Searchz />
       <Menu />
       <Footer />
     </div>
@@ -191,7 +131,6 @@ function App() {
 }
 
 function Header() {
-  // const style = { color: "red", fontSize: "48px", textTransform: "uppercase" };
   const style = {};
 
   return (
@@ -213,8 +152,8 @@ function Menu() {
       {numPizzas > 0 ? (
         <>
           <p>
-            Authentic Italian cuisine. 6 creative dishes to choose from. All
-            from our stone oven, all organic, all delicious.
+            Authentic Italian cuisine. {numPizzas} creative dishes to choose
+            from. All from our stone oven, all organic, all delicious.
           </p>
 
           <ul className="pizzas">
@@ -226,25 +165,11 @@ function Menu() {
       ) : (
         <p>We're still working on our menu. Please come back later </p>
       )}
-
-      {/* <Pizza
-        name="Pizza Spinaci"
-        ingredients="Tomato, mozarella, spinach, and ricotta cheese"
-        photoName="pizzas/spinaci.jpg"
-        price={10}
-      />
-      <Pizza
-        name="Pizza Funghi"
-        ingredients="Tomato, mushrooms"
-        price={12}
-        photoName="pizzas/funghi.jpg"
-      /> */}
     </main>
   );
 }
 
 function Pizza({ pizzaObj }) {
-
   return (
     <li className={`pizza ${pizzaObj.soldOut ? "sold-out" : ""}`}>
       <img src={pizzaObj.photoName} alt={pizzaObj.name} />
@@ -252,29 +177,25 @@ function Pizza({ pizzaObj }) {
         <h3>{pizzaObj.name}</h3>
         <p>{pizzaObj.ingredients}</p>
 
-        {/* {pizzaObj.soldOut ? (
-          <span>SOLD OUT</span>
-        ) : (
-          <span>{pizzaObj.price}</span>
-        )} */}
-
         <span>{pizzaObj.soldOut ? "SOLD OUT" : pizzaObj.price}</span>
       </div>
     </li>
   );
 }
-
+function Searchz() {
+  return (
+    <div className="search-box">
+      <FaSearch />
+      <input type="search" placeholder="Enter you need..." />
+    </div>
+  );
+}
 function Footer() {
   const hour = new Date().getHours();
   const openHour = 12;
   const closeHour = 22;
   const isOpen = hour >= openHour && hour <= closeHour;
   console.log(isOpen);
-
-  // if (hour >= openHour && hour <= closeHour) alert("We're currently open!");
-  // else alert("Sorry we're closed");
-
-  // if (!isOpen) return <p>CLOSED</p>;
 
   return (
     <footer className="footer">
@@ -287,8 +208,6 @@ function Footer() {
       )}
     </footer>
   );
-
-  // return React.createElement("footer", null, "We're currently open!");
 }
 
 function Order({ closeHour, openHour }) {
@@ -303,13 +222,9 @@ function Order({ closeHour, openHour }) {
   );
 }
 
-// React v18
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
 );
-
-// React before 18
-// ReactDOM.render(<App />, document.getElementById("root"));
